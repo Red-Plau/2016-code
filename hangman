@@ -1,0 +1,229 @@
+#Hangman game. Not revised for optimisation.
+
+#-----------------Game setup v--------------------
+from random import randint
+
+correctl1 = 0
+correctl2 = 0
+correctl3 = 0
+
+lives = 10
+
+guess_numbers = ["0", "0", "0"]
+
+one = 0
+two = 0
+three = 0
+
+guess_try = 1
+words = ['ant', 'bat', 'cat', 'dog', 'emu']
+
+word = words[randint(0,4)] #chooses a word randomly from the list "words" above
+
+guessed = ["_" * len(word)]
+
+true_letter_one = word[0]       #Each letter from the word 
+true_letter_two = word [1]      #is separated and put into
+true_letter_three = word[2]     #different variables.
+
+#-----------------Game begins v--------------------
+print ("Welcome to hangman!")
+print("")
+print ("""Rules:
+  Guess the whole, three-letter word! If you only guess single letters, you will lose a life for every letter you get wrong, meaning a faster 'Game Over' for you! Don't guess more than three letters or lives will be subtracted for each letter past three that aren't in the whole word.
+  Letters must be in the correct space to count; if the letter is in the word, you will get a message saying so, but not in which space. 
+  A life will only be subtracted if the letter is not in the whole word.""")
+print ("Good luck!")
+print ("")
+
+print ("_  _  _")
+
+print ("")
+
+while (guess_numbers != ["1", "2", "3"]):
+  print ("")
+  wordguess = input("Guess #" + str(guess_try) + ": ")
+  guess_try += 1
+
+  if (len(wordguess) > 3 or len(wordguess) < 3): 
+    lives -= (len(wordguess) - 3) #subtracts a life for each letter above three
+      
+    while (len(wordguess) < 3 or len(wordguess) > 3): 
+      while (len(wordguess) < 3):
+        print ("Please write no less than three letters")
+        wordguess = input("Guess again: ")
+        if (len(wordguess) == 3):
+          break
+      while (len(wordguess) > 3):
+        print ("Please write no more than three letters")
+        wordguess = input("Guess again: ")
+        if (len(wordguess) == 3):
+          break
+      if (len(wordguess) == 3):
+          break
+        #When the word is finally three letters long, the loops break and the game continues
+        
+  letter_word_one = wordguess[0]
+  letter_word_two = wordguess[1]
+  letter_word_three = wordguess[2]
+  
+  if (correctl1 != 1):
+    if (letter_word_one == true_letter_one):
+      one = 1
+      guessed[0] = str(letter_word_one)
+      correctl1 = 1
+      guess_numbers[0] = "1"
+    if (letter_word_one == true_letter_two or letter_word_one == true_letter_three):
+      print ("Letter " + letter_word_one + " is in the word!") #if one of the guessed letters is in the word but not in the correct space, a message will be printed like so for each letter (same below for each)
+    if (letter_word_one != true_letter_one and letter_word_one != true_letter_two and letter_word_one != true_letter_three):
+      lives -= 1
+      
+  if (correctl2 != 1):
+    if (letter_word_two == true_letter_two):
+      two = 1
+      guessed[1] = str(true_letter_two)
+      correctl2 = 1
+      guess_numbers[1] = "2"
+    if (letter_word_two == true_letter_one or letter_word_two == true_letter_three):
+      print ("Letter " + letter_word_two + " is in the word!")
+    if (letter_word_two != true_letter_one and letter_word_two != true_letter_two and letter_word_two != true_letter_three):
+      lives -= 1
+    
+  if (correctl3 != 1):
+    if (letter_word_three == true_letter_three):
+      three = 1
+      guessed[2] = str(true_letter_three)
+      correctl3 = 1
+      guess_numbers[2] = "3"
+    if (letter_word_three == true_letter_one or letter_word_three == true_letter_two):
+      print ("Letter " + letter_word_three + " is in the word!")
+    if (letter_word_three != true_letter_three and letter_word_three != true_letter_two and letter_word_three != true_letter_three):
+      lives -= 1
+      
+  print (guessed) 
+   
+  if (guess_numbers == ["1", "2", "3"]):
+    print ("You win!")    
+    break
+  
+  #-----------------Game over v--------------------
+  if (lives <= 0):
+    print ("Game over! You lose. The correct word was " + str(word))
+    break
+  
+  print ("Lives left: " + str(lives))
+
+gameagain = input("Play again? (yes/no)")
+
+if (gameagain == "no"):
+  print ("See you next time!")
+
+
+#-----------------Re-play Game v--------------------
+#Everything above is exactly the same, except it is in a while loop that, after each game, asks if you'd like to play again; as long as you keep answering yes, the game will continue. However if you say no, the loop will break and the game will end with a final message like the one above, on line 117 or below on line 225
+
+while (gameagain == "yes"):
+  correctl1 = 0
+  correctl2 = 0
+  correctl3 = 0
+
+  lives = 10
+
+  guess_numbers = ["0", "0", "0"]
+
+
+  one = 0
+  two = 0
+  three = 0
+
+  guess_try = 1
+  words = ['ant', 'bat', 'cat', 'dog', 'emu']
+
+  word = words[randint(0,4)]
+  
+  guessed = ["_" * len(word)]
+  
+  true_letter_one = word[0]
+  true_letter_two = word [1]
+  true_letter_three = word[2]
+  
+  while (guess_numbers != ["1", "2", "3"]):
+    print ("")
+    wordguess = input("Guess #" + str(guess_try) + ": ")
+    guess_try += 1
+
+    if (len(wordguess) > 3 or len(wordguess) < 3):
+      lives -= (len(wordguess) - 3)
+      
+      while (len(wordguess) < 3 or len(wordguess) > 3):
+        while (len(wordguess) < 3):
+          print ("Please write no less than three letters")
+          wordguess = input("Guess again: ")
+          if (len(wordguess) == 3):
+            break
+        while (len(wordguess) > 3):
+          print ("Please write no more than three letters")
+          wordguess = input("Guess again: ")
+          if (len(wordguess) == 3):
+            break
+        if (len(wordguess) == 3):
+          break
+        
+    letter_word_one = wordguess[0]
+    letter_word_two = wordguess[1]
+    letter_word_three = wordguess[2]
+  
+    if (correctl1 != 1):
+      if (letter_word_one == true_letter_one):
+        one = 1
+        guessed[0] = str(letter_word_one)
+        correctl1 = 1
+        guess_numbers[0] = "1"
+      if (letter_word_one == true_letter_two or letter_word_one == true_letter_three):
+        print ("Letter " + letter_word_one + " is in the word!")
+    if (letter_word_one != true_letter_one and letter_word_one != true_letter_two and letter_word_one != true_letter_three):
+      lives -= 1
+  
+    if (correctl2 != 1):
+      if (letter_word_two == true_letter_two):
+        two = 1
+        guessed[1] = str(true_letter_two)
+        correctl2 = 1
+        guess_numbers[1] = "2"
+      if (letter_word_two == true_letter_one or letter_word_two == true_letter_three):
+        print ("Letter " + letter_word_two + " is in the word!")
+      if (letter_word_two != true_letter_one and letter_word_two != true_letter_two and letter_word_two != true_letter_three):
+        lives -= 1
+    
+    if (correctl3 != 1):
+      if (letter_word_three == true_letter_three):
+        three = 1
+        guessed[2] = str(true_letter_three)
+        correctl3 = 1
+        guess_numbers[2] = "3"
+      if (letter_word_three == true_letter_one or letter_word_three == true_letter_two):
+        print ("Letter " + letter_word_three + " is in the word!")
+      if (letter_word_three != true_letter_three and letter_word_three != true_letter_two and letter_word_three != true_letter_three):
+        lives -= 1
+      
+    print (guessed) 
+   
+    if (guess_numbers == ["1", "2", "3"]):
+      print ("You win!") 
+      gameagain = input("Play again? (yes/no)")
+      break
+  
+  #-----------------Game over v--------------------
+    if (lives <= 0):
+      print ("Game over! You lose. The correct word was " + str(word))
+      gameagain = input("Play again? (yes/no)")
+      break
+    
+    print ("Lives left: " + str(lives))
+    
+    gameagain = input("Play again? (yes/no)")
+
+if (gameagain == "no"):
+  print ("See you next time!")
+
+#--------------------------------------------------

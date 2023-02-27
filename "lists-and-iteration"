@@ -1,0 +1,74 @@
+#From intro to lists and iteration.  Not optimised.
+
+number = input("How many students do you wish to store?")
+
+average = 0
+names = []
+grades = []
+
+print ("Please enter " + str(number) + " names.")
+for n in range (0,int(number)):
+  #ask user to input the names of a student...
+  name = input("Enter a name: ")
+  #... then add the name to a list
+  names.append(name)
+    
+#print(names)
+
+print ("Please enter " + str(number) + " grades.")
+for n in range (0,int(number)):
+  #ask user to input the grade of a student...
+  grade = input("Enter a grade for " + names[n] + " :")
+  #... then add the grade to a list
+  grades.append(grade)
+  average += int(grade)
+  
+#print(grades)
+
+average = average / int(number)
+
+print ("Average grade is " + str(average))
+
+starter = input("Would you like to search for a student's grade?")
+if (starter == "yes"):
+  namesearch = input("Enter the student's name: ")
+  while (names.count(namesearch) == 0):
+    print ("Name could not be found. Please try again.")
+    namesearch = input("Enter the student's name: ")
+  if (names.count(namesearch) >= 1):
+    print (namesearch + "'s grade is " + str(grades[names.index(namesearch)]))
+
+nexto = input("Would you like to add a student and a grade, remove a student and a grade, or exit the program? ")
+while (nexto != "add" and nexto != "remove" and nexto != "exit"):
+  nexto = input("Would you like to ADD a student and a grade, REMOVE a student and a grade, or EXIT the program? ")
+
+if (nexto == "add"):
+  number = input("How many students do you wish to store?")
+  print ("Please enter " + str(number) + " names.")
+  for n in range (0,int(number)):
+  #ask user to input the names of a student...
+    name = input("Enter a name: ")
+  #... then add the name to a list
+    names.append(name)
+  
+  print ("Please enter " + str(number) + " grades, in order of the students.")
+  for n in range (0,int(number)):
+  #ask user to input the grade of a student...
+    grade = input("Enter a grade for " + names[n + int(number)] + " :")
+  #... then add the grade to a list
+    grades.append(grade)
+  
+  print ("Thank you for using this program. Have a nice day.")
+  
+elif (nexto == "remove"):
+  remove = input("Which student do you wish to remove? ")
+  while (names.count(remove) == 0):
+    print ( remove + " could not be found. Please try again.")
+    remove = input("Which student do you wish to remove? ")
+  grades.remove(grades[names.index(remove)]) 
+  names.remove(remove)
+  
+  print ("Thank you for using this program. Have a nice day.")
+  
+else:
+  print ("Thank you for using this program. Have a nice day.")

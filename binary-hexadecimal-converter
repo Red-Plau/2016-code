@@ -1,0 +1,68 @@
+#Binary to hexadecimal converter. Not optimised.
+
+answer2 = 0
+binarycheck = 8
+newlist = []
+binlist = []
+
+print("""WORKING BINARY-HEXADECIMAL CONVERTER // MADE FOR 10CH COMPUTER SCIENCE IN 2016.
+
+PLEASE NOTE: This project only accepts binary numbers to work correctly. DO NOT place a space between numbers.
+
+i.e. The binary number 0100 1010 would create an error. To be fixed.
+""")
+binary = input ("Binary number:")
+
+for x in range (0, len(binary)):
+  binlist.append (binary[x])
+  
+if len(binary) %4 == 1: 
+  binlist.insert(0, 0)
+  binlist.insert(0, 0)
+  binlist.insert(0, 0)
+elif len(binary) %4 == 2:
+  binlist.insert(0, 0)
+  binlist.insert(0, 0)
+elif len(binary) %4 == 3: 
+  binlist.insert(0, 0)
+
+#print (binlist)
+
+binary1 = int(binlist[0]) * 8
+binary2 = int(binlist[1]) * 4
+binary3 = int(binlist[2]) * 2
+binary4 = int(binlist[3]) * 1
+
+
+answer = binary1 + binary2 + binary3 + binary4
+  
+for x in range (0, len(binlist)):
+  answer2 = answer2 +(int(binlist[x]) * binarycheck)
+  if binarycheck == 8:
+   binarycheck = 4
+  elif binarycheck == 4:
+   binarycheck = 2
+  elif binarycheck == 2:
+   binarycheck = 1
+  else:
+   binarycheck = 8
+
+   if answer2 < 10:
+    newlist.append(answer2)
+   if answer2 == 10:
+    newlist.append("A")
+   if answer2 == 11:
+    newlist.append("B")
+   if answer2 == 12:
+    newlist.append("C")
+   if answer2 == 13:
+    newlist.append("D")
+   if answer2 == 14:
+    newlist.append("E")
+   if answer2 == 15:
+    newlist.append("F")
+   answer2 = 0
+
+str1 = ''.join(str(x) for x in newlist)
+
+print ("#" + str1)

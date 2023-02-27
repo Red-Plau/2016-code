@@ -1,4 +1,4 @@
-#Simple bubblesort code.
+#Simple bubblesort code.  Not revised for optimisation.
 
 newlist = [14, 33, 27, 35 ,10] #I should add an input to ask for diff numbers to add to a list and sort from there.
 

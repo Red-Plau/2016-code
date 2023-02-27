@@ -1,0 +1,108 @@
+#A game to be played with dice. Not revised for optimisation.
+
+names = []
+
+for x in range(0,2):
+  name = input("Please insert player name: ")
+  names.append(name)
+  while (len(name) == 0):
+    name = input("Please insert player name: ")
+    names.append(name)
+#There is no need to check if the user has input two names or not as the loop goes only twice 'round, the only thing that has been checked is that the user has input a name at all.
+
+startingpoint = input("Please insert the total amount of points: ")
+
+while (not startingpoint.isdigit()):
+  startingpoint = input("Please insert an interger for the total amount of points: ")
+#If the number is not made up of digits, the user will be asked to input solely digits.
+
+while (int(startingpoint)%2 == 1):
+  startingpoint = input("Please insert an even total amount of points: ")
+#If the remainder of the total amount of points is 1, it means that the number is odd.
+
+
+halfstart = int(startingpoint) /2 #Half of all points available...
+player1score = halfstart #Player 1 and 2 begin with half of the total
+player2score = halfstart #amount of points available
+
+print ("Please roll the dice, once each...")
+
+player1dice = input("What is " + str(names[0]) + "'s score?")
+player2dice = input("What is " + str(names[1]) + "'s score?")
+#Basically asking the scores for players 1 and 2
+
+while (not player1dice.isdigit() or not player2dice.isdigit()):
+  print ("Please input integers only.")
+  player1dice = input("What is " + str(names[0]) + "'s score?")
+  player2dice = input("What is " + str(names[1]) + "'s score?")
+#Basically asking the scores for players 1 and 2 for an answer in integers if the sring isn't numbers
+
+if (int(player1dice) > int(player2dice)):
+  dicedifference = int(player1dice) - int(player2dice)
+  
+elif (int(player2dice) > int(player1dice)):
+  dicedifference = int(player2dice) - int(player1dice)
+#Bigger number - smaller number; finding out difference
+  
+dicedifference = int(dicedifference)/2
+#Half of difference
+
+if (int(player1dice) > int(player2dice)):  
+  player1score = int(player1score) + int(dicedifference)
+  player2score = int(player2score) - int(dicedifference)
+  print (str(names[0]) + " won this round with " + str(player1score) + " points. " + str(names[1]) + " has " + str(player2score) + " points.")
+  
+elif (int(player2dice) > int(player1dice)):
+  player2score = int(player2score) + int(dicedifference)
+  player1score = int(player1score) - int(dicedifference)
+  print (str(names[1]) + " won this round with " + str(player2score) + " points. " + str(names[0]) + " has " + str(player1score) + " points.")
+  
+if (player1score < 0):
+  print ("Game is over. " + str(names[1]) + " has won, with " + str(player2score) + " points. " + str(names[0]) + " has lost.")
+  
+elif (player2score < 0):
+  print ("Game is over. " + str(names[0]) + " has won, with " + str(player2score) + " points. " + str(names[1]) + " has lost.")
+#Game ends if either player's scores falls below 0.
+
+#----------------------LOOP FOR CONTINUED GAME---------------------
+
+while (int(player1score) >= 0 and int(player2score) >= 0):
+  print ("Please roll the dice again, once each...")
+
+  player1dice = input("What is " + str(names[0]) + "'s score?")
+  player2dice = input("What is " + str(names[1]) + "'s score?")
+  #Basically asking the scores for players 1 and 2
+
+  while (not player1dice.isdigit() or not player2dice.isdigit()):
+    print ("Please input integers only.")
+    player1dice = input("What is " + str(names[0]) + "'s score?")
+    player2dice = input("What is " + str(names[1]) + "'s score?")
+  #Basically asking the scores for players 1 and 2 for an answer in integers if the sring isn't numbers
+
+  if (int(player1dice) > int(player2dice)):
+    dicedifference = int(player1dice) - int(player2dice)
+  
+  elif (int(player2dice) > int(player1dice)):
+    dicedifference = int(player2dice) - int(player1dice)
+    #Bigger number - smaller number; finding out difference
+  
+  dicedifference = int(dicedifference)/2
+  #Half of difference
+
+  if (int(player1dice) > int(player2dice)):  
+    player1score = int(player1score) + int(dicedifference)
+    player2score = int(player2score) - int(dicedifference)
+    print (str(names[0]) + " won this round with " + str(player1score) + " points. " + str(names[1]) + " has " + str(player2score) + " points.")
+  
+  elif (int(player2dice) > int(player1dice)):
+    player2score = int(player2score) + int(dicedifference)
+    player1score = int(player1score) - int(dicedifference)
+    print (str(names[1]) + " won this round with " + str(player2score) + " points. " + str(names[0]) + " has " + str(player1score) + " points.")
+  
+  if (player1score < 0):
+    print ("Game is over. " + str(names[1]) + " has won, with " + str(player2score) + " points. " + str(names[0]) + " has lost.")
+  
+  elif (player2score < 0):
+    print ("Game is over. " + str(names[0]) + " has won, with " + str(player1score) + " points. " + str(names[1]) + " has lost.")
+    #Game ends if either player's scores falls below 0.
+#------------------------------------------------------------------
